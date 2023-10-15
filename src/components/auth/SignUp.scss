@@ -1,0 +1,40 @@
+h1 {
+  color: white;
+}
+
+h2 {
+  margin: unset;
+}
+
+input {
+  min-height: 36px;
+  padding-left: 8px;
+}
+
+button {
+  width: 100%;
+}
+
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #ababab;
+
+  &__email,
+  &__password,
+  &__display-name {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &:hover {
+      color: white;
+
+      & input::placeholder {
+        color: white;
+      }
+    }
+  }
+}
