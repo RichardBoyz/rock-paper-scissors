@@ -1,0 +1,35 @@
+h1 {
+  color: white;
+}
+
+h2 {
+  margin: unset;
+}
+
+input {
+  min-height: 36px;
+  padding-left: 8px;
+}
+
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #ababab;
+
+  &__email,
+  &__password {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &:hover {
+      color: white;
+
+      & input::placeholder {
+        color: white;
+      }
+    }
+  }
+}
