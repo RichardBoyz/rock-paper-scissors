@@ -5,6 +5,10 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const signIn = () => {
+    // TODO: 登入
+  };
+
   return (
     <>
       <form className="sign-in">
@@ -29,6 +33,8 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
+
+        <button type="submit">登入</button>
       </form>
     </>
   );
