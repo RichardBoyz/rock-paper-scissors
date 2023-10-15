@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+import { auth } from "../../firebase";
 import "./SignIn.scss";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = () => {
-    // TODO: 登入
+  const signIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
-      <form className="sign-in">
+      <form className="sign-in" onSubmit={signIn}>
         <h1>登入</h1>
 
         <section className="sign-in__email">
