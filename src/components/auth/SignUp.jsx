@@ -3,37 +3,30 @@ import { auth } from "../../firebase";
 import "./SignUp.scss";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
 
-  const signUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        updateCurrentUserDisplayName(userCredential.user.auth);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [error, setError] = useState("");
 
-  const updateCurrentUserDisplayName = (auth) => {
-    updateProfile(auth.currentUser, {
-      displayName: displayName,
-    })
-      .then(() => {
-        console.log("暱稱更新成功");
-      })
-      .catch((error) => {
-        console.log("暱稱更新失敗");
-      });
+  const { createUser } = UserAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await createUser(email, password, displayName);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
   };
 
   return (
     <>
-      <form className="sign-up" onSubmit={signUp}>
+      <form className="sign-up" onSubmit={handleSubmit}>
         <h1>註冊</h1>
 
         <section className="sign-up__email">
