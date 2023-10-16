@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase";
 import "./SignIn.scss";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const signIn = (e) => {
+  const navigate = useNavigate();
+
+  const { signIn } = UserAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      await signIn(email, password);
+      navigate("/home");
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
   };
 
   return (
     <>
-      <form className="sign-in" onSubmit={signIn}>
+      <form className="sign-in" onSubmit={handleSubmit}>
         <h1>登入</h1>
 
         <section className="sign-in__email">
