@@ -15,6 +15,10 @@ button {
   width: 100%;
 }
 
+p {
+  align-self: flex-start;
+}
+
 .sign-in {
   display: flex;
   flex-direction: column;

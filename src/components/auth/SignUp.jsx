@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import "./SignUp.scss";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
+import { Link } from "react-router-dom";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +65,10 @@ const SignUp = () => {
             onChange={(e) => setDisplayName(e.target.value)}
           />
         </section>
+
+        <p>
+          已經有帳號? <Link to="/">前往登入</Link>{" "}
+        </p>
 
         <button type="submit">註冊</button>
       </form>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import "./SignIn.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { Link } from "react-router-dom";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +42,10 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
+
+        <p>
+          還沒有帳號? <Link to="/signup">我要註冊</Link>{" "}
+        </p>
 
         <button type="submit">登入</button>
       </form>
