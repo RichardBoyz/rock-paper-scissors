@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import "./SignUp.scss";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +13,14 @@ const SignUp = () => {
 
   const { createUser } = UserAuth();
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await createUser(email, password, displayName);
+      navigate("/Home");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
