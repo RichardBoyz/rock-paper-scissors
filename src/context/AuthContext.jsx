@@ -7,7 +7,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { collection, addDoc } from "@firebase/firestore";
 
 const UserContext = createContext();
 
@@ -19,12 +20,26 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  const createUserInDatabase = async (currentUser) => {
+    const { uid, displayName, email } = currentUser;
+
+    const docRef = await addDoc(collection(db, "users"), {
+      uid,
+      displayName,
+      email,
+    });
+    console.log("Create user succeed.");
+  };
+
   const createUser = async (email, password, displayName) => {
-    await createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        updateUserDisplayName(userCredential.user.auth, displayName);
-      }
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
     );
+    await updateUserDisplayName(userCredential.user.auth, displayName);
+    console.log(userCredential);
+    await createUserInDatabase(userCredential.user.auth.currentUser);
   };
 
   const signIn = (email, password) => {
@@ -37,7 +52,6 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
     return () => {
