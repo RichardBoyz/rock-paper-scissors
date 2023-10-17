@@ -1,6 +1,8 @@
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./Home.scss";
+import BattleList from "./Battle/BattleList";
+import Invite from "./Invite/Invite";
 const Home = () => {
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
@@ -21,8 +23,11 @@ const Home = () => {
       <section className="home__container">
         <div className="home__left">
           <p>使用者: {user && user.displayName}</p>
+          <Invite />
         </div>
-        <div className="home__right">{/* Battle list */}</div>
+        <div className="home__right">
+          <BattleList />
+        </div>
       </section>
     </div>
   );
