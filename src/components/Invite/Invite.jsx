@@ -3,10 +3,16 @@ import "./Invite.scss";
 
 const Invite = () => {
   const [inviteUsers, setInviteUsers] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
   return (
     <div className="invite">
       <section className="invite__search">
-        <input type="text" placeholder="輸入使用者信箱" />
+        <input
+          type="text"
+          placeholder="輸入使用者信箱"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
         <button className="invite__search-button">添加使用者</button>
       </section>
 
