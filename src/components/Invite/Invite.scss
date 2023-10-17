@@ -1,0 +1,31 @@
+.invite {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    &-button {
+      width: 100%;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    gap: 5px;
+    flex-wrap: wrap;
+    transition: all 0.3s;
+    background-color: darkgrey;
+    border-radius: 10px;
+
+    &--active {
+      height: 500px;
+    }
+  }
+}
