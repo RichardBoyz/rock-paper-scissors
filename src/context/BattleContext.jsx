@@ -6,4 +6,4 @@ const BattleProvider = ({ children }) => {
   return <BattleContext.Provider>{children}</BattleContext.Provider>;
 };
 
-const BattleField = useContext(BattleContext);
+export const BattleField = () => useContext(BattleContext);
