@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./BattleList.scss";
 import BattleCard from "./BattleCard";
 import { collection, query, where, getDocs } from "firebase/firestore";
