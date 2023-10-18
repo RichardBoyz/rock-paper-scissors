@@ -66,7 +66,7 @@ const Invite = () => {
         ))}
       </section>
 
-      <button>建立對戰</button>
+      <button disabled={!inviteUsers.length}>建立對戰</button>
     </div>
   );
 };
