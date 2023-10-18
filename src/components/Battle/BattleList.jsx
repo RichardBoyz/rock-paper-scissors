@@ -15,7 +15,6 @@ const BattleList = () => {
   const { user } = UserAuth();
   const [battles, setBattles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [canListen, setCanListen] = useState(false);
   const findBattles = () => {
     if (!user.auth) return;
     setIsLoading(true);
@@ -24,48 +23,13 @@ const BattleList = () => {
       where("userIds", "array-contains", user.auth.currentUser.uid)
     );
     const unsub = onSnapshot(battleQuery, (snapShot) => {
-      if (snapShot.docChanges().length) {
-        const battleDataDict = {};
-        battles.forEach((battle, index) => {
-          battleDataDict[battle.uid] = index;
-        });
-        const newBattles = [...battles];
-        console.log(newBattles);
-        snapShot.docChanges().forEach((change) => {
-          if (battleDataDict[change.doc.id] != undefined) {
-            newBattles[battleDataDict[change.doc.id]] = {
-              ...newBattles[battleDataDict[change.doc.id]],
-              ...change.doc.data(),
-            };
-          } else {
-            newBattles.push({ uid: change.doc.id, ...change.doc.data() });
-          }
-        });
-        setBattles((pre) => [...newBattles]);
-      }
+      const newBattles = [];
+      snapShot.forEach((element) => {
+        newBattles.push({ uid: element.id, ...element.data() });
+      });
+      setBattles([...newBattles]);
       setIsLoading(false);
     });
-  };
-
-  const getBattles = async () => {
-    if (!user.auth) return;
-    const battleQuery = query(
-      collection(db, "battles"),
-      where("userIds", "array-contains", user.auth.currentUser.uid)
-    );
-    try {
-      const querySnapshot = await getDocs(battleQuery);
-      const newBattles = [];
-      querySnapshot.forEach((doc) => {
-        newBattles.push({ uid: doc.id, ...doc.data() });
-      });
-      setBattles((pre) => [...newBattles]);
-      setCanListen(true);
-    } catch (error) {
-      console.log(error.message);
-    }
-
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -73,10 +37,6 @@ const BattleList = () => {
     return () => {
       findBattles();
     };
-  }, [canListen]);
-
-  useEffect(() => {
-    getBattles();
   }, [user.auth]);
 
   const buildBattleCard = () => {
