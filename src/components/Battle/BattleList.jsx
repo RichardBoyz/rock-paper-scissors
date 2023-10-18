@@ -33,6 +33,22 @@ const BattleList = () => {
   useEffect(() => {
     getBattles();
   }, [user.auth]);
+
+  const buildBattleCard = () => {
+    if (isLoading) return <p>Loading...</p>;
+    if (!battles.length) return <p>沒有對戰</p>;
+    console.log(battles);
+    return battles.map((battle) => (
+      <BattleCard
+        key={battle.uid}
+        name={battle.name}
+        uid={battle.uid}
+        isFinished={battle.isFinished}
+      />
+    ));
+  };
+
+  return <div className="battle-list">{buildBattleCard()}</div>;
 };
 
 export default BattleList;
