@@ -35,7 +35,13 @@ const Invite = () => {
     }
   };
 
-  const removeUserFromInvitedList = (userId) => {};
+  const removeUserFromInvitedList = (userId) => {
+    const newInviteUserList = inviteUsers.filter(
+      (userInfo) => userInfo.uid !== userId
+    );
+    setInviteUsers((pre) => [...newInviteUserList]);
+  };
+
   return (
     <div className="invite">
       <section className="invite__search">
