@@ -22,7 +22,10 @@ const Home = () => {
 
       <section className="home__container">
         <div className="home__left">
-          <p>使用者: {user && user.displayName}</p>
+          <div className="home__display-name">
+            <span>使用者: {user && user.displayName}</span>
+          </div>
+
           <Invite />
         </div>
         <div className="home__right">
