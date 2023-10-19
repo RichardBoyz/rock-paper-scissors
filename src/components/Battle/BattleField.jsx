@@ -16,12 +16,15 @@ import {
   query,
   where,
   documentId,
+  onSnapshot,
 } from "firebase/firestore";
 
 const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
   const navigate = useNavigate();
   const [isCreator, setIsCreator] = useState(false);
+  const [message, setMessage] = useState([]);
+  const [roomName, setRoomName] = useState("");
 
   const checkUserInBattle = async () => {
     const checkQuery = query(
@@ -39,7 +42,6 @@ const BattleField = () => {
       setIsLoading(false);
     }
   };
-
   const [isLoading, setIsLoading] = useState(true);
 
   const { user } = UserAuth();
@@ -47,6 +49,30 @@ const BattleField = () => {
   useEffect(() => {
     if (user.auth) {
       checkUserInBattle();
+
+      if (!user.auth.currentUser) return;
+      const battleQuery = query(
+        collection(db, "battles"),
+        where(documentId(), "==", id)
+      );
+      const unsub = onSnapshot(battleQuery, (snapShot) => {
+        const newRounds = [];
+        let newRoomName = "";
+        snapShot.forEach((element) => {
+          newRoomName = element.data().name;
+          const rounds = [...element.data().round];
+          rounds.forEach((round, index) => {
+            newRounds.push({
+              round: index + 1,
+              ...round,
+            });
+          });
+        });
+        setRoomName(newRoomName);
+        console.log(newRounds);
+        setMessage((pre) => [...newRounds]);
+      });
+      return () => unsub();
     }
   }, [user.auth]);
 
@@ -66,7 +92,7 @@ const BattleField = () => {
             onClick={handleClickBack}
             className="battle-field__back"
           />
-          <span className="battle-field__room-name">{/* Room name */}</span>
+          <span className="battle-field__room-name">{roomName}</span>
         </nav>
         <div className="battle-field__content"></div>
       </div>
