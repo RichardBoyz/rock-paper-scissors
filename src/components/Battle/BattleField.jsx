@@ -23,7 +23,7 @@ const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
   const navigate = useNavigate();
   const [isCreator, setIsCreator] = useState(false);
-  const [message, setMessage] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
 
   const checkUserInBattle = async () => {
@@ -70,7 +70,7 @@ const BattleField = () => {
         });
         setRoomName(newRoomName);
         console.log(newRounds);
-        setMessage((pre) => [...newRounds]);
+        setMessages((pre) => [...newRounds]);
       });
       return () => unsub();
     }
