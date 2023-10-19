@@ -21,6 +21,7 @@ import {
 const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
   const navigate = useNavigate();
+  const [isCreator, setIsCreator] = useState(false);
 
   const checkUserInBattle = async () => {
     const checkQuery = query(
@@ -32,6 +33,9 @@ const BattleField = () => {
     if (querySnapshot.empty) {
       navigate("/home");
     } else {
+      const checkIsCreator =
+        querySnapshot.docs[0].data().creator === user.auth.currentUser.uid;
+      setIsCreator(checkIsCreator);
       setIsLoading(false);
     }
   };
@@ -67,7 +71,7 @@ const BattleField = () => {
         <div className="battle-field__content"></div>
       </div>
       <div className="battle-field__select">
-        <button>結算</button>
+        {isCreator ? <button>結算</button> : null}
         <div className="battle-field__choices">
           {choices.map((choice, index) => {
             return (
