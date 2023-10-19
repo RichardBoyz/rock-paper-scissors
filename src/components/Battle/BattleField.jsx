@@ -35,6 +35,7 @@ const BattleField = () => {
   const [isCreator, setIsCreator] = useState(false);
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
+  const [selectHand, setSelectHand] = useState(-1);
 
   const checkUserInBattle = async () => {
     const checkQuery = query(
@@ -91,7 +92,7 @@ const BattleField = () => {
   };
 
   const handleSelect = (choiceValue) => {
-    // Set select value
+    setSelectHand(choiceValue);
   };
 
   const { id } = useParams();
@@ -135,6 +136,9 @@ const BattleField = () => {
             );
           })}
         </div>
+        {selectHand != -1 ? (
+          <p className="battle-field__select-text">{`你選擇了 ${VALUE_TO_RPC_STRING[selectHand]}`}</p>
+        ) : null}
         <button>確定</button>
       </div>
     </>
