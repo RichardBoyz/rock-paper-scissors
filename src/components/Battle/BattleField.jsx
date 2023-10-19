@@ -19,9 +19,18 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import BattleMessage from "./BattleMessage";
+const VALUE_TO_RPC_STRING = Object.freeze({
+  1: "石頭",
+  2: "布",
+  3: "剪刀",
+});
 
 const BattleField = () => {
-  const choices = [faHandFist, faHand, faHandScissors];
+  const choices = [
+    { icon: faHandFist, choiceValue: 1 },
+    { icon: faHand, choiceValue: 2 },
+    { icon: faHandScissors, choiceValue: 3 },
+  ];
   const navigate = useNavigate();
   const [isCreator, setIsCreator] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -81,6 +90,10 @@ const BattleField = () => {
     navigate("/home");
   };
 
+  const handleSelect = (choiceValue) => {
+    // Set select value
+  };
+
   const { id } = useParams();
   return isLoading ? (
     <div>Loading</div>
@@ -112,8 +125,12 @@ const BattleField = () => {
         <div className="battle-field__choices">
           {choices.map((choice, index) => {
             return (
-              <button className="battle-field__choice" key={index}>
-                <FontAwesomeIcon icon={choice} />
+              <button
+                className="battle-field__choice"
+                key={index}
+                onClick={() => handleSelect(choice.choiceValue)}
+              >
+                <FontAwesomeIcon icon={choice.icon} />
               </button>
             );
           })}
