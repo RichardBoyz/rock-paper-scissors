@@ -19,6 +19,10 @@
     align-items: center;
   }
 
+  &__back {
+    cursor: pointer;
+  }
+
   &__room-name {
     position: absolute;
     top: 50%;

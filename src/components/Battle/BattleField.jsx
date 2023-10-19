@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./BattleField.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,13 +10,21 @@ import {
 
 const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
+  const navigate = useNavigate();
+  const handleClickBack = () => {
+    navigate("/home");
+  };
 
   const { id } = useParams();
   return (
     <>
       <div className="battle-field">
         <nav className="battle-field__nav">
-          <FontAwesomeIcon icon={faArrowLeft} />
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            onClick={handleClickBack}
+            className="battle-field__back"
+          />
           <span className="battle-field__room-name">{/* Room name */}</span>
         </nav>
         <div className="battle-field__content"></div>
