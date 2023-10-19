@@ -16,7 +16,7 @@ const BattleList = () => {
   const [battles, setBattles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const findBattles = () => {
-    if (!user.auth) return;
+    if (!user.auth || !user.auth.currentUser) return;
     setIsLoading(true);
     const battleQuery = query(
       collection(db, "battles"),
