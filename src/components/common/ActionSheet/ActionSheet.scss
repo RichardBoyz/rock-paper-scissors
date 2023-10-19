@@ -1,0 +1,31 @@
+.action-sheet {
+  &__wrapper {
+    position: absolute;
+    display: flex;
+    background-color: rgba(59, 59, 59, 0.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: clamp(350px, 50%, 600px);
+    height: clamp(300px, 40%, 500px);
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 30px 1px rgb(31, 31, 31);
+    animation: slide-in 0.3s;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    padding: 10px;
+    box-sizing: border-box;
+    color: black;
+  }
+}

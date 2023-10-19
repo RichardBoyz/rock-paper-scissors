@@ -1,5 +1,4 @@
 .battle-message {
-  max-height: 300px;
   border-radius: 10px;
   display: flex;
   background-color: burlywood;
@@ -7,4 +6,82 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  gap: 10px;
+
+  &__round {
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  &__name-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    background-color: coral;
+    border-radius: 10px;
+    padding: 10px 0;
+  }
+
+  &__name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 10px;
+  }
+
+  &__name-title {
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: darkgray;
+    padding: 5px 10px;
+    border-radius: 10px;
+    align-self: center;
+  }
+
+  &__info {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+
+  &__finish {
+    border: 7px solid rgb(69, 69, 201);
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+
+  &__result {
+    display: flex;
+    background-color: rgb(74, 121, 60);
+    border-radius: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  &__choice {
+    flex: 1;
+    background-color: cadetblue;
+    border-radius: 10px;
+    padding: 5px 10px;
+    overflow: hidden;
+
+    &-icon {
+      text-align: center;
+    }
+  }
+
+  &__choice-name-list {
+    display: flex;
+    flex-direction: column;
+
+    & span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
 }
