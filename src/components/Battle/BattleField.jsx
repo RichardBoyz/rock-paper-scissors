@@ -18,6 +18,7 @@ import {
   documentId,
   onSnapshot,
 } from "firebase/firestore";
+import BattleMessage from "./BattleMessage";
 
 const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
@@ -94,7 +95,17 @@ const BattleField = () => {
           />
           <span className="battle-field__room-name">{roomName}</span>
         </nav>
-        <div className="battle-field__content"></div>
+        <div className="battle-field__content">
+          {messages.map((message) => {
+            return (
+              <BattleMessage
+                key={message.round}
+                result={message.result}
+                round={message.round}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="battle-field__select">
         {isCreator ? <button>結算</button> : null}
