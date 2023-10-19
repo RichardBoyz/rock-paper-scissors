@@ -5,6 +5,7 @@ import {
   faHand,
   faHandFist,
   faHandScissors,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 const BattleField = () => {
@@ -14,7 +15,10 @@ const BattleField = () => {
   return (
     <>
       <div className="battle-field">
-        <nav className="battle-field__nav" />
+        <nav className="battle-field__nav">
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <span className="battle-field__room-name">{/* Room name */}</span>
+        </nav>
         <div className="battle-field__content"></div>
       </div>
       <div className="battle-field__select">
