@@ -5,6 +5,7 @@ import SignUp from "./components/auth/SignUp";
 import Home from "./components/Home";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BattleField from "./components/Battle/BattleField";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/battle/:id"
+            element={
+              <ProtectedRoute>
+                <BattleField />
               </ProtectedRoute>
             }
           />
