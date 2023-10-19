@@ -48,7 +48,7 @@ const Invite = () => {
     battleUserIds.push(user.auth.currentUser.uid);
 
     const defaultRound = {
-      isFinshed: false,
+      isFinished: false,
       winnerIds: [],
       loserIds: [],
     };
