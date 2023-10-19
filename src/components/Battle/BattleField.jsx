@@ -7,16 +7,53 @@ import {
   faHandScissors,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import { UserAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { db } from "../../firebase";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  documentId,
+} from "firebase/firestore";
 
 const BattleField = () => {
   const choices = [faHandFist, faHand, faHandScissors];
   const navigate = useNavigate();
+
+  const checkUserInBattle = async () => {
+    const checkQuery = query(
+      collection(db, "battles"),
+      where(documentId(), "==", id),
+      where("userIds", "array-contains", user.auth.currentUser.uid)
+    );
+    const querySnapshot = await getDocs(checkQuery);
+    if (querySnapshot.empty) {
+      navigate("/home");
+    } else {
+      setIsLoading(false);
+    }
+  };
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { user } = UserAuth();
+
+  useEffect(() => {
+    if (user.auth) {
+      checkUserInBattle();
+    }
+  }, [user.auth]);
+
   const handleClickBack = () => {
     navigate("/home");
   };
 
   const { id } = useParams();
-  return (
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <>
       <div className="battle-field">
         <nav className="battle-field__nav">
