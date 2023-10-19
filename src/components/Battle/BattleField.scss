@@ -44,6 +44,10 @@
     padding: 10px;
     gap: 10px;
     width: -webkit-fill-available;
+
+    &-text {
+      align-self: center;
+    }
   }
 
   &__choices {
