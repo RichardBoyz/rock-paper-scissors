@@ -49,6 +49,8 @@ const Invite = () => {
 
     const defaultRound = {
       isFinshed: false,
+      winnerIds: [],
+      loserIds: [],
     };
     const usersResultDict = {};
     battleUserIds.forEach((id) => {
