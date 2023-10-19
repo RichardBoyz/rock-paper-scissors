@@ -1,0 +1,53 @@
+.battle-field {
+  width: 100%;
+  display: flex;
+  position: relative;
+  background-color: bisque;
+  color: black;
+  height: 50%;
+  overflow: hidden;
+
+  &__nav {
+    position: fixed;
+    height: 44px;
+    width: 100%;
+    background-color: lightsalmon;
+    box-shadow: 0 0 8px 2px black;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    padding: 44px 10px 10px;
+    flex: 1;
+    width: 100%;
+    background-color: rgba(27, 53, 80, 0.8);
+    overflow: scroll;
+  }
+
+  &__select {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    width: -webkit-fill-available;
+  }
+
+  &__choices {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  &__choice {
+    padding: 10px;
+    flex: 1;
+    background-color: chocolate;
+    font-weight: bolder;
+    border-radius: 10px;
+    text-align: center;
+  }
+}
