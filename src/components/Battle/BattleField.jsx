@@ -35,6 +35,7 @@ const BattleField = () => {
   const [isCreator, setIsCreator] = useState(false);
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
+  const [canSelect, setCanSelect] = useState(false);
   const [selectHand, setSelectHand] = useState(-1);
 
   const checkUserInBattle = async () => {
@@ -80,7 +81,15 @@ const BattleField = () => {
           });
         });
         setRoomName(newRoomName);
-        console.log(newRounds);
+        const latestRoundUserResult = newRounds.at(-1).usersResult;
+        if (
+          latestRoundUserResult[user.auth.currentUser.uid] === undefined ||
+          latestRoundUserResult[user.auth.currentUser.uid] != 0
+        ) {
+          setCanSelect((pre) => false);
+        } else {
+          setCanSelect((pre) => true);
+        }
         setMessages((pre) => [...newRounds]);
       });
       return () => unsub();
@@ -93,6 +102,10 @@ const BattleField = () => {
 
   const handleSelect = (choiceValue) => {
     setSelectHand(choiceValue);
+  };
+
+  const handleConfirmChoice = async () => {
+    // TODO: Update data
   };
 
   const { id } = useParams();
@@ -139,7 +152,10 @@ const BattleField = () => {
         {selectHand != -1 ? (
           <p className="battle-field__select-text">{`你選擇了 ${VALUE_TO_RPC_STRING[selectHand]}`}</p>
         ) : null}
-        <button>確定</button>
+
+        <button disabled={!canSelect} onClick={handleConfirmChoice}>
+          確定
+        </button>
       </div>
     </>
   );
