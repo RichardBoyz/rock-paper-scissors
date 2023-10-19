@@ -63,6 +63,7 @@ const Invite = () => {
         round: [defaultRound],
         winner: [],
         isFinished: false,
+        creator: user.auth.currentUser.uid,
       });
     } catch (error) {
       console.log(error.message);
